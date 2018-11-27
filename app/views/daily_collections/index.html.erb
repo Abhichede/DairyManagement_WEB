@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<h4>Daily Collections
+  <%= link_to 'New Daily Collection', new_daily_collection_path, class: 'btn btn-primary' %>
+</h4>
+
+<table class="table table-bordered" id="total_collections_table">
+  <thead>
+    <tr>
+      <th>Customer</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Shift</th>
+      <th>Litre</th>
+      <th>Fat</th>
+      <th>Snf</th>
+      <th>Rate</th>
+      <th>Total price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @daily_collections.each do |daily_collection| %>
+      <tr>
+        <td><%= daily_collection.customer.name %></td>
+        <td><%= daily_collection.date %></td>
+        <td><%= daily_collection.time.strftime("%I:%M %p") %></td>
+        <td><%= daily_collection.shift %></td>
+        <td><%= daily_collection.litre %></td>
+        <td><%= daily_collection.fat %></td>
+        <td><%= daily_collection.snf %></td>
+        <td><%= daily_collection.rate %></td>
+        <td><%= daily_collection.total_price %></td>
+        <td>
+          <%= link_to '<i class="fa fa-eye"></i>'.html_safe,
+                      daily_collection, class: 'btn btn-primary btn-sm',
+                      'data-toggle':"tooltip", 'data-placement': "top",
+                      title: "Show details" %>
+          <%= link_to '<i class="fa fa-edit"></i>'.html_safe,
+                      edit_daily_collection_path(daily_collection),
+                      class: 'btn btn-secondary btn-sm', 'data-toggle':"tooltip",
+                      'data-placement': "top", title: "Edit Entry" %>
+          <%= link_to '<i class="fa fa-trash"></i>'.html_safe,
+                      daily_collection, class: 'btn btn-danger btn-sm',
+                      method: :delete, data: { confirm: 'Are you sure?' },
+                      'data-toggle':"tooltip", 'data-placement': "top",
+                      title: "Delete Entry" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

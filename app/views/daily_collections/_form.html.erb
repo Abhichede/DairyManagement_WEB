@@ -1,0 +1,123 @@
+<%= form_with(model: daily_collection, local: true) do |form| %>
+  <% if daily_collection.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(daily_collection.errors.count, "error") %> prohibited this daily_collection from being saved:</h2>
+
+      <ul>
+      <% daily_collection.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group row">
+    <%= form.label :customer_id, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.select :customer_id, @customers.map {|customer| [customer.name, customer.id]}, { include_blank: true },
+                      {class: 'form-control selectpicker', "data-live-search": true,
+                       onchange: 'getCustomerID();', onload: 'getCustomerID(this);', required: true} %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label 'Cattle Type', class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <input type="text" title="Cattle Type" id="daily_collection_cattle_type" class="form-control" disabled>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :shift, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_field :shift, class: 'form-control', readonly: true %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :litre, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_field :litre, class: 'form-control', required: true, pattern: '[0-9]+([\.,][0-9]+)?', step: '0.01',
+                          title: 'This should be a number with up to 2 decimal places.' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :fat, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_field :fat, class: 'form-control', required: true, pattern: '[0-9]+([\.,][0-9]+)?', step: '0.01',
+                          title: 'This should be a number with up to 2 decimal places.' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :lacto, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_field :lacto, class: 'form-control', required: true,
+                          pattern: '[0-9]+([\.,][0-9]+)?', step: '0.01',
+                          title: 'This should be a number with up to 2 decimal places.',
+                          onchange: 'calculateSNF(this);' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :water_level, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_field :water_level, class: 'form-control', pattern: '[0-9]+([\.,][0-9]+)?', step: '0.01',
+                          title: 'This should be a number with up to 2 decimal places.' %>
+      <small class="form-text text-muted">This is optional field.</small>
+    </div>
+
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :snf, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_field :snf, class: 'form-control', readonly: true, required: true, pattern: '[0-9]+([\.,][0-9]+)?', step: '0.01',
+                          title: 'This should be a number with up to 2 decimal places.' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :rate, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_field :rate, class: 'form-control', readonly: true, required: true, pattern: '[0-9]+([\.,][0-9]+)?', step: '0.01',
+                          title: 'This should be a number with up to 2 decimal places.' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :total_price, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.text_field :total_price, class: 'form-control', readonly: true, required: true, pattern: '[0-9]+([\.,][0-9]+)?', step: '0.01',
+                          title: 'This should be a number with up to 2 decimal places.' %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Submit', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+
+<!-- Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="error_ModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="error_ModalLabel">
+
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="error_modalText"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

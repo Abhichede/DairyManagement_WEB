@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-2 col-lg-2"></div>
+  <div class="col-md-8 col-lg-8">
+    <div class="card">
+      <h4 class="card-header">
+        <%= link_to customer_payments_path, class: 'btn' do %>
+          <i class="fa fa-arrow-left"></i>
+        <% end %>
+        New Payment
+      </h4>
+      <div class="card-body">
+        <%= render 'form', customer_payment: @customer_payment %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 col-lg-2"></div>
+</div>

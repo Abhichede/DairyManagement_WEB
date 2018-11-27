@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Rate Charts - "<%= params[:cattle_type] %>"</h1>
+
+
+<%
+
+  exLeft = 0
+  exright = 0
+  exTop = 0
+  exBottom = 0
+
+  cattle_type_ = params[:cattle_type]
+
+  if cattle_type_ === 'BUFFALO'
+    exLeft = 7.5
+    exright = 9.5
+    exTop = 5.0
+    exBottom = 9.4
+
+  elsif cattle_type_ === 'COW'
+    exLeft = 7.0
+    exright = 9.0
+    exTop = 2.5
+    exBottom = 6.0
+  end
+%>
+<table class="table table-bordered" id="rate_chart_table">
+  <thead>
+    <tr>
+      <th>###</th>
+      <% (exLeft.round(2)).step(exright.round(2), 0.1.round(2)) do |i| %>
+        <th><%= i %></th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% (exTop.round(2)).step(exBottom.round(2), 0.1.round(2)) do |i| %>
+      <tr>
+        <th><%= i.round(2) %></th>
+        <% (exLeft.round(2)).step(exright.round(2), 0.1.round(2)) do |j| %>
+          <td>
+            <% @rates = @rate_charts.where(snf: j.round(2), fat: i.round(2)).last %>
+            <% unless @rates.nil? %>
+              <%= @rates.rate %>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+
+
+  </tbody>
+</table>

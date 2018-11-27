@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h4>Customer Payments</h4>
+
+<table class="table table-bordered" id="table_customer_payments">
+  <thead>
+    <tr>
+      <th>Customer</th>
+      <th>Date</th>
+      <th>Amount</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customer_payments.each do |customer_payment| %>
+      <tr>
+        <td><%= customer_payment.customer.name %></td>
+        <td><%= customer_payment.date %></td>
+        <td><%= customer_payment.amount %></td>
+        <td><%= customer_payment.description %></td>
+        <td>
+          <%= link_to '<i class="fa fa-eye"></i>'.html_safe,
+                      customer_payment, class: 'btn btn-primary btn-sm',
+                      'data-toggle':"tooltip", 'data-placement': "top",
+                      title: "Show details" %>
+          <%= link_to '<i class="fa fa-edit"></i>'.html_safe,
+                      edit_customer_payment_path(customer_payment),
+                      class: 'btn btn-secondary btn-sm', 'data-toggle':"tooltip",
+                      'data-placement': "top", title: "Edit Entry" %>
+          <%= link_to '<i class="fa fa-trash"></i>'.html_safe,
+                      customer_payment, class: 'btn btn-danger btn-sm',
+                      method: :delete, data: { confirm: 'Are you sure?' },
+                      'data-toggle':"tooltip", 'data-placement': "top",
+                      title: "Delete Entry" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Customer Payment', new_customer_payment_path %>

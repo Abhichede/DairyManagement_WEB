@@ -1,0 +1,95 @@
+<%= form_with(model: rate_chart, local: true) do |form| %>
+  <% if rate_chart.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(rate_chart.errors.count, "error") %> prohibited this rate_chart from being saved:</h2>
+
+      <ul>
+      <% rate_chart.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group row">
+    <%= form.label :cattle_type, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= form.select :cattle_type, options_for_select(['COW', 'BUFFALO']), {}, {class: 'form-control', onchange: 'getval(this);'} %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-lg-6">
+      <h3>
+        <span class="badge badge-primary">
+          Base SNF :  <span id="base_snf">8.5</span>
+        </span>
+      </h3>
+    </div>
+    <div class="col-md-6 col-lg-6">
+      <h3>
+        <span class="badge badge-primary">
+          Base FAT :  <span id="base_fat">3.5</span>
+        </span>
+      </h3>
+    </div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header">
+      Add Base rate
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4 col-lg-4"></div>
+        <div class="col-md-4 col-lg-4">
+          <div class="form-group">
+            <%= form.label 'Top (-)' %>
+            <%= form.text_field :top, class: 'form-control', required: true, pattern: '[0-9]+([\.,][0-9]+)?', step: '0.01',
+                title: 'This should be a number with up to 2 decimal places.' %>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-4"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-lg-4">
+          <div class="form-group">
+            <%= form.label 'Left (-)' %>
+            <%= form.text_field :left, class: 'form-control', required: true, pattern: '[0-9]+([\.,][0-9]+)?', step: '0.01',
+                                title: 'This should be a number with up to 2 decimal places.' %>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-4">
+          <div class="form-group">
+            <%= form.label 'Base Rate' %>
+            <%= form.text_field :base_rate, class: 'form-control', required: true, pattern: '[0-9]+([\.,][0-9]+)?', step: '0.01',
+                                title: 'This should be a number with up to 2 decimal places.' %>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-4">
+          <div class="form-group">
+            <%= form.label 'Right (+)' %>
+            <%= form.text_field :right, class: 'form-control', required: true, pattern: '[0-9]+([\.,][0-9]+)?', step: '0.01',
+                                title: 'This should be a number with up to 2 decimal places.' %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-lg-4"></div>
+        <div class="col-md-4 col-lg-4">
+          <div class="form-group">
+            <%= form.label 'Bottom (+)' %>
+            <%= form.text_field :bottom, class: 'form-control', required: true, pattern: '[0-9]+([\.,][0-9]+)?', step: '0.01',
+                                title: 'This should be a number with up to 2 decimal places.' %>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-4"></div>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <div class="actions form-group">
+    <%= form.submit 'Submit', class: 'btn btn-primary' %>
+  </div>
+<% end %>

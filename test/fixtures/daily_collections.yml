@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer_id: 1
+  date: 2018-11-24
+  time: 2018-11-24 11:14:45
+  shift: MyString
+  litre: 1.5
+  fat: 1.5
+  lacto: 1.5
+  snf: 1.5
+  water_level: 1.5
+  rate: 1.5
+  total_price: 1.5
+
+two:
+  customer_id: 1
+  date: 2018-11-24
+  time: 2018-11-24 11:14:45
+  shift: MyString
+  litre: 1.5
+  fat: 1.5
+  lacto: 1.5
+  snf: 1.5
+  water_level: 1.5
+  rate: 1.5
+  total_price: 1.5

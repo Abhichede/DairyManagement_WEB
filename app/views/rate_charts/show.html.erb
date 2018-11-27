@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cattle type:</strong>
+  <%= @rate_chart.cattle_type %>
+</p>
+
+<p>
+  <strong>Snf:</strong>
+  <%= @rate_chart.snf %>
+</p>
+
+<p>
+  <strong>Fat:</strong>
+  <%= @rate_chart.fat %>
+</p>
+
+<p>
+  <strong>Rate:</strong>
+  <%= @rate_chart.rate %>
+</p>
+
+<%= link_to 'Edit', edit_rate_chart_path(@rate_chart), class: 'btn btn-primary' %> |
+<%= link_to 'Back', rate_charts_path, class: 'btn btn-secondary' %>

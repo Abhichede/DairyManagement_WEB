@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-2 col-lg-2"></div>
+  <div class="col-md-8 col-lg-8">
+    <div class="card" id="daily_collection_form">
+      <h4 class="card-header">
+        <%= link_to daily_collections_path, class: 'btn' do %>
+          <i class="fa fa-arrow-left"></i>
+        <% end %>
+        Editing Daily Collection
+
+        <%= link_to 'Show', @daily_collection, class: 'btn btn-secondary pull-right' %>
+      </h4>
+      <div class="card-body">
+        <%= render 'form', daily_collection: @daily_collection %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 col-lg-2"></div>
+</div>
+

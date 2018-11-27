@@ -1,0 +1,10 @@
+{
+  "name": "DairyManagement_web",
+  "private": true,
+  "dependencies": {
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.10"
+  }
+}
