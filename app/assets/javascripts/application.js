@@ -14,11 +14,25 @@
 //= require activestorage
 //= require moment
 //= require bootstrap-datetimepicker
+//= require jquery.validate
 // require jquery
 //  require turbolinks
 //= require_tree .
 
 
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
+    $('[data-toggle="tooltip"]').tooltip();
+
+    $('input,select').on('keypress', function (e) {
+        if (e.which === 13) {
+            e.preventDefault();
+            var $next = $('[tabIndex=' + (+this.tabIndex + 1) + ']');
+            console.log($next.length);
+            if (!$next.length) {
+                $next = $('[tabIndex=1]');
+                $('form').submit();
+            }
+            $next.focus();
+        }
+    });
+});

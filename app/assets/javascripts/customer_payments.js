@@ -12,4 +12,5 @@ $(function () {
    });
 
    $('table#table_customer_payments').DataTable();
+   $('form#customer_payment_form').validate();
 });

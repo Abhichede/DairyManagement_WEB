@@ -1,6 +1,5 @@
 <div class="row">
-  <div class="col-md-2 col-lg-2"></div>
-  <div class="col-md-8 col-lg-8">
+  <div class="col-md-6 col-lg-6">
     <div class="card" id="daily_collection_form">
       <h4 class="card-header">
         <%= link_to daily_collections_path, class: 'btn' do %>
@@ -17,6 +16,33 @@
       </div>
     </div>
   </div>
-  <div class="col-md-2 col-lg-2"></div>
+  <div class="col-md-6 col-lg-6">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Customer</th>
+        <th>Shift</th>
+        <th>Litre</th>
+        <th>Fat</th>
+        <th>Snf</th>
+        <th>Rate</th>
+        <th>Total price</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @daily_collections.each do |daily_collection| %>
+        <tr>
+          <td><%= daily_collection.customer.name %></td>
+          <td><%= daily_collection.shift %></td>
+          <td><%= daily_collection.litre %></td>
+          <td><%= daily_collection.fat %></td>
+          <td><%= daily_collection.snf %></td>
+          <td><%= daily_collection.rate %></td>
+          <td><%= daily_collection.total_price %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 

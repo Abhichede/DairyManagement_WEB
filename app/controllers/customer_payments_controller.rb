@@ -1,5 +1,6 @@
 class CustomerPaymentsController < ApplicationController
   before_action :set_customer_payment, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /customer_payments
   # GET /customer_payments.json
@@ -27,6 +28,7 @@ class CustomerPaymentsController < ApplicationController
   # POST /customer_payments.json
   def create
     @customer_payment = CustomerPayment.new(customer_payment_params)
+    @customer_payment.user = current_user
 
     respond_to do |format|
       if @customer_payment.save
@@ -42,6 +44,7 @@ class CustomerPaymentsController < ApplicationController
   # PATCH/PUT /customer_payments/1
   # PATCH/PUT /customer_payments/1.json
   def update
+    @customer_payment.user = current_user
     respond_to do |format|
       if @customer_payment.update(customer_payment_params)
         format.html { redirect_to @customer_payment, notice: 'Customer payment was successfully updated.' }

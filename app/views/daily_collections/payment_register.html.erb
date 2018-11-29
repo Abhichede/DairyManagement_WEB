@@ -45,7 +45,7 @@
     <tr>
       <th>Customer</th>
       <th>Litre</th>
-      <th>Rate</th>
+      <th>Rate <span class="note small text-muted">This is Average rate Not for actual calculation</span></th>
       <th>Total price</th>
     </tr>
   </thead>
@@ -63,7 +63,7 @@
     <tr>
       <th>Totals</th>
       <th><%= @daily_collections.sum(&:litre) %></th>
-      <th><%= @daily_collections.average(:rate) %></th>
+      <th></th>
       <th><%= @daily_collections.sum(&:total_price) %></th>
     </tr>
   <% end %>

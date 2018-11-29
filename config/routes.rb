@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :customer_payments
   resources :rate_charts
   resources :daily_collections do

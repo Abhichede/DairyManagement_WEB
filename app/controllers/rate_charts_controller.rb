@@ -1,6 +1,6 @@
 class RateChartsController < ApplicationController
   before_action :set_rate_chart, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
   # GET /rate_charts
   # GET /rate_charts.json
   def index

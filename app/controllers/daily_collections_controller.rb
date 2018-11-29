@@ -1,6 +1,6 @@
 class DailyCollectionsController < ApplicationController
   before_action :set_daily_collection, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
   # GET /daily_collections
   # GET /daily_collections.json
   def index
@@ -14,7 +14,16 @@ class DailyCollectionsController < ApplicationController
 
   # GET /daily_collections/new
   def new
+    time = Time.now
+    hours = time.hour
+    shift = "Morning"
+    if hours > 12
+      shift = "Evening"
+    else
+      shift = "Morning"
+    end
     @customers = Customer.all
+    @daily_collections = DailyCollection.where(date: Date.today, shift: shift).order("date DESC")
     @daily_collection = DailyCollection.new
   end
 
@@ -27,12 +36,12 @@ class DailyCollectionsController < ApplicationController
   # POST /daily_collections.json
   def create
     @daily_collection = DailyCollection.new(daily_collection_params)
-    @daily_collection.date = Date.today
     @daily_collection.time = Time.now
+    @daily_collection.user = current_user
 
     respond_to do |format|
       if @daily_collection.save
-        format.html { redirect_to @daily_collection, notice: 'Daily collection was successfully created.' }
+        format.html { redirect_to new_daily_collection_path, notice: 'Daily collection was successfully created.' }
         format.json { render :show, status: :created, location: @daily_collection }
       else
         format.html { render :new }
@@ -44,6 +53,7 @@ class DailyCollectionsController < ApplicationController
   # PATCH/PUT /daily_collections/1
   # PATCH/PUT /daily_collections/1.json
   def update
+    @daily_collection.user = current_user
     respond_to do |format|
       if @daily_collection.update(daily_collection_params)
         format.html { redirect_to @daily_collection, notice: 'Daily collection was successfully updated.' }

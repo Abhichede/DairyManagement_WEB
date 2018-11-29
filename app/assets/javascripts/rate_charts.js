@@ -11,4 +11,6 @@ function getval(sel)
 
 $(document).ready(function() {
     $('#rate_chart_table').DataTable();
+
+    $('form#rate_chart_form').validate();
 } );
