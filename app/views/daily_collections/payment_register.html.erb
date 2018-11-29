@@ -40,32 +40,40 @@
   </div>
 </div>
 <br>
-<table class="table table-bordered" id="total_collections_table">
-  <thead>
-    <tr>
-      <th>Customer</th>
-      <th>Litre</th>
-      <th>Rate <span class="note small text-muted">This is Average rate Not for actual calculation</span></th>
-      <th>Total price</th>
-    </tr>
-  </thead>
-
-  <tbody>
-  <% unless @daily_collections.nil? %>
-    <% @daily_collections.each do |daily_collection| %>
+<div class="card">
+  <div class="card-body">
+    <table class="table table-bordered" id="total_collections_table">
+      <thead>
       <tr>
-        <td><%= daily_collection.customer.name %></td>
-        <td><%= daily_collection.litre %></td>
-        <td><%= daily_collection.rate %></td>
-        <td><%= daily_collection.total_price %></td>
+        <th>Customer</th>
+        <th>Litre</th>
+        <th>FAT</th>
+        <th>SNF</th>
+        <th>Rate <span class="note small text-muted">This is Average rate Not for actual calculation</span></th>
+        <th>Total price</th>
       </tr>
-    <% end %>
-    <tr>
-      <th>Totals</th>
-      <th><%= @daily_collections.sum(&:litre) %></th>
-      <th></th>
-      <th><%= @daily_collections.sum(&:total_price) %></th>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+      </thead>
+
+      <tbody>
+      <% unless @daily_collections.nil? %>
+        <% @daily_collections.each do |daily_collection| %>
+          <tr>
+            <td><%= daily_collection.customer.name %></td>
+            <td><%= daily_collection.litre %></td>
+            <td><%= daily_collection.fat %></td>
+            <td><%= daily_collection.snf %></td>
+            <td><%= daily_collection.rate %></td>
+            <td><%= daily_collection.total_price %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <th>Totals</th>
+          <th><%= @daily_collections.sum(&:litre) %></th>
+          <th></th>
+          <th><%= @daily_collections.sum(&:total_price) %></th>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -3,7 +3,11 @@
   <tr>
     <th>Customer</th>
     <th>Litre</th>
-    <th>Rate <span class="note small-text text-muted">This is Average rate Not for actual calculation</span></th>
+    <th>FAT</th>
+    <th>SNF</th>
+    <th>Rate <br/>
+      <span class="note small-text text-muted" style="font-size: 8px;">This is Average rate Not for actual calculation</span>
+    </th>
     <th>Total price</th>
   </tr>
   </thead>
@@ -14,6 +18,8 @@
       <tr>
         <td><%= daily_collection.customer.name %></td>
         <td><%= daily_collection.litre %></td>
+        <td><%= daily_collection.fat %></td>
+        <td><%= daily_collection.snf %></td>
         <td><%= daily_collection.rate %></td>
         <td><%= daily_collection.total_price %></td>
       </tr>
@@ -21,7 +27,7 @@
     <tr>
       <th>Totals</th>
       <th><%= @daily_collections.sum(&:litre) %></th>
-      <th><%= (@daily_collections.sum(&:rate) / @daily_collections.count).round(2) %></th>
+      <th></th>
       <th><%= @daily_collections.sum(&:total_price) %></th>
     </tr>
   <% end %>

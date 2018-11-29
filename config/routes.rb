@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'dashboard#index'
   devise_for :users
   resources :customer_payments
   resources :rate_charts
@@ -8,7 +9,6 @@ Rails.application.routes.draw do
       get 'daily_report'
     end
   end
-  root 'dashboard#index'
   resources :customers
 
   get 'rate_by_snf_and_fat', to: 'rate_charts#rate_by_snf_and_fat'

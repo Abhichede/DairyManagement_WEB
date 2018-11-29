@@ -76,25 +76,28 @@ class DailyCollectionsController < ApplicationController
   end
 
   def payment_register
-    unless params[:from_date] == nil && params[:to_date] == nil
-      @daily_collections = DailyCollection.select("sum(total_price) as total_price, avg(rate) as rate, avg(fat) as fat, avg(snf) snf, customer_id as customer_id, sum(litre) as litre").where(date: params[:from_date]..params[:to_date]).group("customer_id")
-      respond_to do |format|
-        format.html
-        format.pdf do
-          render pdf: 'Payment_register', encoding: 'UTF-8'
-        end
+
+    from_date = params[:from_date].nil? ? Date.today : params[:from_date]
+    to_date = params[:to_date].nil? ? Date.today : params[:to_date]
+
+    @daily_collections = DailyCollection.select("sum(total_price) as total_price, avg(rate) as rate, avg(fat) as fat, avg(snf) snf, customer_id as customer_id, sum(litre) as litre").where(date: from_date..to_date).group("customer_id")
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'Payment_register', encoding: 'UTF-8'
       end
     end
   end
 
   def daily_report
-    unless params[:date] == nil
-      @daily_collections = DailyCollection.where(date: params[:date])
-      respond_to do |format|
-        format.html
-        format.pdf do
-          render pdf: 'Daily_report', encoding: 'UTF-8'
-        end
+    date = params[:date].nil? ? Date.today : params[:date]
+    @daily_collections = DailyCollection.where(date: date)
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'Daily_report', encoding: 'UTF-8'
       end
     end
   end
