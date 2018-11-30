@@ -1,0 +1,63 @@
+<span style="text-align: center">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      SHIVKRUPA DOODH SANKALAN ANI SHEET KENDRA <BR>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      MADKIJAMB Mo. 9970430295, 9623109896
+</span>
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <th>Date: </th>
+      <td><%= @daily_collection.date %> <%= @daily_collection.time.strftime("%H:%M %p") %></td>
+    </tr>
+    <tr>
+      <th>Name: </th>
+      <td><%= @daily_collection.customer.name %></td>
+    </tr>
+    <tr>
+      <th>Acc No: </th>
+      <td><%= @daily_collection.id %></td>
+    </tr>
+    <tr>
+      <th>Shift: </th>
+      <td><%= @daily_collection.shift %></td>
+    </tr>
+    <tr>
+      <th>Milk Type: </th>
+      <td><%= @daily_collection.customer.cattle_type %></td>
+    </tr>
+    <tr>
+      <th>Litre: </th>
+      <td><%= @daily_collection.litre %></td>
+    </tr>
+    <tr>
+      <th>FAT: </th>
+      <td><%= @daily_collection.fat %></td>
+    </tr>
+    <tr>
+      <th>SNF: </th>
+      <td><%= @daily_collection.snf %></td>
+    </tr>
+    <tr>
+      <th>Lacto: </th>
+      <td><%= @daily_collection.lacto %></td>
+    </tr>
+    <tr>
+      <th>Rate: </th>
+      <td><%= @daily_collection.rate %></td>
+    </tr>
+    <tr>
+      <th>Amount: </th>
+      <td><%= @daily_collection.total_price %></td>
+    </tr>
+  </tbody>
+</table>
+
+-------------------------------------------------
+Thank You
+-------------------------------------------------

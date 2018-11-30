@@ -1,6 +1,5 @@
 <div class="row">
-  <div class="col-md-2 col-lg-2"></div>
-  <div class="col-md-8 col-lg-8">
+  <div class="col">
     <div class="card" id="daily_collection_form">
       <h4 class="card-header">
         <%= link_to daily_collections_path, class: 'btn' do %>
@@ -15,6 +14,55 @@
       </div>
     </div>
   </div>
-  <div class="col-md-2 col-lg-2"></div>
+  <div class="col" style="font-size: small;">
+    <div class="card">
+      <div class="card-body">
+        <table class="table table-bordered" id="table_current_collection">
+          <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Shift</th>
+            <th>Litre</th>
+            <th>Fat</th>
+            <th>Snf</th>
+            <th>Rate</th>
+            <th>Total price</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @daily_collections.each do |daily_collection| %>
+            <tr>
+              <td><%= daily_collection.customer.name %></td>
+              <td><%= daily_collection.shift %></td>
+              <td><%= daily_collection.litre %></td>
+              <td><%= daily_collection.fat %></td>
+              <td><%= daily_collection.snf %></td>
+              <td><%= daily_collection.rate %></td>
+              <td><%= daily_collection.total_price %></td>
+              <td>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <%= link_to '<i class="fa fa-print"></i>'.html_safe,
+                              daily_collection_path(daily_collection, format: 'pdf'),
+                              class: 'btn btn-secondary btn-sm ', 'data-toggle':"tooltip",
+                              'data-placement': "top", title: "Print" %>
+                  <%= link_to '<i class="fa fa-edit"></i>'.html_safe,
+                              edit_daily_collection_path(daily_collection),
+                              class: 'btn btn-warning btn-sm ', 'data-toggle':"tooltip",
+                              'data-placement': "top", title: "Edit Entry" %>
+                  <%= link_to '<i class="fa fa-trash"></i>'.html_safe,
+                              daily_collection, class: 'btn btn-danger btn-sm ',
+                              method: :delete, data: { confirm: 'Are you sure?' },
+                              'data-toggle':"tooltip", 'data-placement': "top",
+                              title: "Delete Entry" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 

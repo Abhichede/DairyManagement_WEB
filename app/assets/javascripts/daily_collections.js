@@ -1,5 +1,9 @@
 $(function () {
     $('table#total_collections_table').DataTable();
+    $('#table_current_collection').DataTable({
+        scrollY: 400,
+        order: false
+    });
 
     $('#from_date_payment_register').datetimepicker({
         format: 'DD-MM-YYYY',
@@ -150,7 +154,7 @@ function calculateSNFAndUpdateRate(fat, lacto, litres, cattle_type) {
                 $("#errorModal").modal("show");
             }else {
                 $("input#daily_collection_rate").val(rate);
-                $("input#daily_collection_total_price").val(rate * litres);
+                $("input#daily_collection_total_price").val(accounting.toFixed((rate * litres), 2));
             }
         },
         error: function (jqXHR, exception) {

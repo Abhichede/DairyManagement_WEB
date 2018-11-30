@@ -15,3 +15,12 @@
  *= require_self
  */
 
+body{
+    background: linear-gradient(45deg, #93a5cf, #e4efe9) no-repeat scroll center center !important;
+    min-height: 45rem;
+}
+.navbar{
+    /*background: linear-gradient(45deg, #93a5cf, #e4efe9) no-repeat scroll center center !important;*/
+}
+
+

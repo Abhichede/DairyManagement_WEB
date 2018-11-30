@@ -15,7 +15,8 @@
       <div class="form-group mx-sm-3 mb-2">
         <label class="sr-only" for="customer_id">Customer</label>
         <div class="input-group date mb-3" id="from_date_payment_register">
-          <input type="text" class="form-control" placeholder="Date" name="date" aria-describedby="basic-addon2" id="customer_id">
+          <input type="text" class="form-control" placeholder="Date" name="date"
+                 aria-describedby="basic-addon2" id="customer_id" value="<%= params[:date] %>">
           <div class="input-group-append" id="basic-addon2">
             <div class="btn btn-outline-secondary">
               <i class="fa fa-calendar"></i>
@@ -31,47 +32,51 @@
   </div>
 </div>
 <br>
-<table class="table table-bordered" id="total_collections_table">
-  <thead>
-  <tr>
-    <th>Customer</th>
-    <th>Date</th>
-    <th>Time</th>
-    <th>Shift</th>
-    <th>Litre</th>
-    <th>Fat</th>
-    <th>Snf</th>
-    <th>Rate</th>
-    <th>Total price</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% unless @daily_collections.nil? %>
-    <% @daily_collections.each do |daily_collection| %>
+<div class="card">
+  <div class="card-body">
+    <table class="table table-bordered" id="total_collections_table">
+      <thead>
       <tr>
-        <td><%= daily_collection.customer.name %></td>
-        <td><%= daily_collection.date %></td>
-        <td><%= daily_collection.time.strftime("%I:%M %p") %></td>
-        <td><%= daily_collection.shift %></td>
-        <td><%= daily_collection.litre %></td>
-        <td><%= daily_collection.fat %></td>
-        <td><%= daily_collection.snf %></td>
-        <td><%= daily_collection.rate %></td>
-        <td><%= daily_collection.total_price %></td>
+        <th>Customer</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Shift</th>
+        <th>Litre</th>
+        <th>Fat</th>
+        <th>Snf</th>
+        <th>Rate</th>
+        <th>Total price</th>
       </tr>
-    <% end %>
-    <tr>
-      <th>Totals</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th><%= @daily_collections.sum(&:litre) %></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th><%= @daily_collections.sum(&:total_price) %></th>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+      </thead>
+
+      <tbody>
+      <% unless @daily_collections.nil? %>
+        <% @daily_collections.each do |daily_collection| %>
+          <tr>
+            <td><%= daily_collection.customer.name %></td>
+            <td><%= daily_collection.date %></td>
+            <td><%= daily_collection.time.strftime("%I:%M %p") %></td>
+            <td><%= daily_collection.shift %></td>
+            <td><%= daily_collection.litre %></td>
+            <td><%= daily_collection.fat %></td>
+            <td><%= daily_collection.snf %></td>
+            <td><%= daily_collection.rate %></td>
+            <td><%= daily_collection.total_price %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <th>Totals</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th><%= @daily_collections.sum(&:litre) %></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th><%= @daily_collections.sum(&:total_price) %></th>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,11 +1,7 @@
-<p id="notice"><%= notice %></p>
-
-<h4>
-  Customer Payments
-  <%= link_to 'New Customer Payment', new_customer_payment_path, class: 'btn btn-primary pull-right' %>
-</h4>
-<br>
 <div class="card">
+  <div class="card-header">
+    All Transactions
+  </div>
   <div class="card-body">
     <table class="table table-bordered" id="table_customer_payments">
       <thead>
@@ -26,6 +22,10 @@
           <td><%= customer_payment.amount %></td>
           <td><%= customer_payment.description %></td>
           <td>
+            <%= link_to '<i class="fa fa-print"></i>'.html_safe,
+                        customer_payment_path(customer_payment, format: 'pdf'), class: 'btn btn-info btn-sm',
+                        'data-toggle':"tooltip", 'data-placement': "top",
+                        title: "Print" %>
             <%= link_to '<i class="fa fa-eye"></i>'.html_safe,
                         customer_payment, class: 'btn btn-primary btn-sm',
                         'data-toggle':"tooltip", 'data-placement': "top",

@@ -4,7 +4,12 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.json
   def index
-    @customers = Customer.all
+    if params[:customer_name]
+      @customers = Customer.where("name LIKE '%#{params[:customer_name]}%'")
+    else
+      @customers = Customer.all
+    end
+
   end
 
   # GET /customers/1

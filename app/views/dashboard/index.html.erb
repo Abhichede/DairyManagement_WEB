@@ -1,7 +1,107 @@
 <div class="container">
   <div class="row">
-    <div class="col"></div>
-    <div class="col">Hello</div>
-    <div class="col"></div>
+    <div class="col">
+      <div class="card text-white bg-primary mb-3">
+        <div class="card-header">Total Customers</div>
+        <div class="card-body">
+          <h5 class="card-title text-center">
+            <%= link_to customers_path, class: 'text-white' do %>
+              <i class="fa fa-users" style="font-size: 8rem"></i>
+            <% end %>
+          </h5>
+        </div>
+        <div class="card-footer">
+          <h3 class="text-center">
+            <%= link_to customers_path, class: 'text-white' do %>
+              <%= @customers.count %>
+            <% end %>
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card text-white bg-secondary mb-3">
+        <div class="card-header">Total Milk Collected</div>
+        <div class="card-body">
+          <h5 class="card-title text-center">
+            <%= link_to daily_collections_path, class: 'text-white' do %>
+              <i class="fa fa-tint" style="font-size: 8rem"></i>
+            <% end %>
+          </h5>
+        </div>
+        <div class="card-footer">
+          <h3 class="text-center">
+            <%= link_to daily_collections_path, class: 'text-white' do %>
+              <%= @daily_collections.sum(&:litre) %> Ltr
+            <% end %>
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card text-white bg-danger mb-3">
+        <div class="card-header">Payments Done</div>
+        <div class="card-body">
+          <h5 class="card-title text-center">
+            <%= link_to customer_payments_path, class: 'text-white' do %>
+              <i class="fa fa-check" style="font-size: 8rem"></i>
+            <% end %>
+          </h5>
+        </div>
+        <div class="card-footer">
+          <h3 class="text-center">
+            <%= link_to customer_payments_path, class: 'text-white' do %>
+              Rs. <%= @customer_payments.sum(&:amount) %>
+            <% end %>
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-header">Total Amount</div>
+        <div class="card-body">
+          <h5 class="card-title text-center">
+            <%= link_to daily_collections_path, class: 'text-white' do %>
+              <i class="fa fa-money" style="font-size: 8rem"></i>
+            <% end %>
+          </h5>
+        </div>
+        <div class="card-footer">
+          <h3 class="text-center">
+            <%= link_to daily_collections_path, class: 'text-white' do %>
+              Rs. <%= @daily_collections.sum(&:total_price) %>
+            <% end %>
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-9">
+      <div class="card text-white bg-info mb-3">
+        <div class="card-header">Current Week's Collection</div>
+        <div class="card-body">
+          <h5 class="card-title text-center">
+            <%= line_chart daily_collection_group_by_date, xtitle: "Date", ytitle: "Amount in Rs." %>
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-header">Available Messages</div>
+        <div class="card-body">
+          <h5 class="card-title text-center">
+            <i class="fa fa-envelope" style="font-size: 8rem"></i>
+          </h5>
+        </div>
+        <div class="card-footer">
+          <h3 class="text-center">
+            <%= @messages["count_m"] %>
+          </h3>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

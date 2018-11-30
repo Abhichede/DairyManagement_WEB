@@ -15,6 +15,7 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require jquery.validate
+//= require chartkick
 // require jquery
 //  require turbolinks
 //= require_tree .

@@ -1,14 +1,15 @@
-<h4>
-  Customers
-
-  <span class="pull-right">
-    <%= link_to 'New Customer', new_customer_path, class: 'btn btn-primary' %>
-  </span>
-</h4>
-<br>
 <div class="card">
+  <div class="card-header">
+    <h4>
+      Customers
+
+      <span class="pull-right">
+    <%= link_to 'Add new Customer', new_customer_path, class: 'btn btn-primary' %>
+  </span>
+    </h4>
+  </div>
   <div class="card-body">
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="customers_table">
       <thead>
       <tr>
         <th>Name</th>

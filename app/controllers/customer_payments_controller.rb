@@ -11,6 +11,12 @@ class CustomerPaymentsController < ApplicationController
   # GET /customer_payments/1
   # GET /customer_payments/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'Receipt', encoding: 'UTF-8'
+      end
+    end
   end
 
   # GET /customer_payments/new
@@ -32,7 +38,8 @@ class CustomerPaymentsController < ApplicationController
 
     respond_to do |format|
       if @customer_payment.save
-        format.html { redirect_to @customer_payment, notice: 'Customer payment was successfully created.' }
+        send_payment_receipt_sms(@customer_payment.customer.contact, @customer_payment)
+        format.html { redirect_to session[:previous_url], notice: 'Customer payment was successfully created.' }
         format.json { render :show, status: :created, location: @customer_payment }
       else
         format.html { render :new }
@@ -47,7 +54,8 @@ class CustomerPaymentsController < ApplicationController
     @customer_payment.user = current_user
     respond_to do |format|
       if @customer_payment.update(customer_payment_params)
-        format.html { redirect_to @customer_payment, notice: 'Customer payment was successfully updated.' }
+        send_payment_receipt_sms(@customer_payment.customer.contact, @customer_payment)
+        format.html { redirect_to session[:previous_url], notice: 'Customer payment was successfully updated.' }
         format.json { render :show, status: :ok, location: @customer_payment }
       else
         format.html { render :edit }
@@ -61,7 +69,7 @@ class CustomerPaymentsController < ApplicationController
   def destroy
     @customer_payment.destroy
     respond_to do |format|
-      format.html { redirect_to customer_payments_url, notice: 'Customer payment was successfully destroyed.' }
+      format.html { redirect_to session[:previous_url], notice: 'Customer payment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

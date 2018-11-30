@@ -10,6 +10,12 @@ class DailyCollectionsController < ApplicationController
   # GET /daily_collections/1
   # GET /daily_collections/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'Receipt', encoding: 'UTF-8'
+      end
+    end
   end
 
   # GET /daily_collections/new
@@ -23,13 +29,22 @@ class DailyCollectionsController < ApplicationController
       shift = "Morning"
     end
     @customers = Customer.all
-    @daily_collections = DailyCollection.where(date: Date.today, shift: shift).order("date DESC")
+    @daily_collections = DailyCollection.where(date: Date.today, shift: shift).order("time DESC")
     @daily_collection = DailyCollection.new
   end
 
   # GET /daily_collections/1/edit
   def edit
+    time = Time.now
+    hours = time.hour
+    shift = "Morning"
+    if hours > 12
+      shift = "Evening"
+    else
+      shift = "Morning"
+    end
     @customers = Customer.all
+    @daily_collections = DailyCollection.where(date: Date.today, shift: shift).order("time DESC")
   end
 
   # POST /daily_collections
@@ -39,13 +54,29 @@ class DailyCollectionsController < ApplicationController
     @daily_collection.time = Time.now
     @daily_collection.user = current_user
 
+    time = Time.now
+    hours = time.hour
+    shift = "Morning"
+    if hours > 12
+      shift = "Evening"
+    else
+      shift = "Morning"
+    end
+
+    already_collected = DailyCollection.where(customer_id: daily_collection_params[:customer_id],
+                                               date: daily_collection_params[:date], shift: shift).count
     respond_to do |format|
-      if @daily_collection.save
-        format.html { redirect_to new_daily_collection_path, notice: 'Daily collection was successfully created.' }
-        format.json { render :show, status: :created, location: @daily_collection }
+      if already_collected != 0
+        format.html { redirect_to new_daily_collection_path, alert: 'Milk already collected for this customer & shift.' }
       else
-        format.html { render :new }
-        format.json { render json: @daily_collection.errors, status: :unprocessable_entity }
+        if @daily_collection.save
+          send_daily_receipt_sms(@daily_collection.customer.contact, @daily_collection)
+          format.html { redirect_to new_daily_collection_path, notice: 'Daily collection was successfully created.' }
+          format.json { render :show, status: :created, location: @daily_collection }
+        else
+          format.html { render :new }
+          format.json { render json: @daily_collection.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -56,7 +87,8 @@ class DailyCollectionsController < ApplicationController
     @daily_collection.user = current_user
     respond_to do |format|
       if @daily_collection.update(daily_collection_params)
-        format.html { redirect_to @daily_collection, notice: 'Daily collection was successfully updated.' }
+        send_daily_receipt_sms(@daily_collection.customer.contact, @daily_collection)
+        format.html { redirect_to session[:previous_url], notice: 'Daily collection was successfully updated.' }
         format.json { render :show, status: :ok, location: @daily_collection }
       else
         format.html { render :edit }

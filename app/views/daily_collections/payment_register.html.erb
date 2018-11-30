@@ -12,7 +12,9 @@
       <div class="form-group mx-sm-3 mb-2">
         <label class="sr-only" for="customer_id">Customer</label>
         <div class="input-group date mb-3" id="from_date_payment_register">
-          <input type="text" class="form-control" placeholder="From Date" name="from_date" aria-describedby="basic-addon2" id="customer_id">
+          <input type="text" class="form-control" placeholder="From Date"
+                 name="from_date" aria-describedby="basic-addon2" id="customer_id"
+                 value="<%= params[:from_date] %>">
           <div class="input-group-append" id="basic-addon2">
             <div class="btn btn-outline-secondary">
               <i class="fa fa-calendar"></i>
@@ -24,7 +26,9 @@
       <div class="form-group mx-sm-3 mb-2">
         <label class="sr-only" for="customer_id">Customer</label>
         <div class="input-group date mb-3" id="to_date_payment_register">
-          <input type="text" class="form-control" placeholder="To Date" name="to_date" aria-describedby="basic-addon1">
+          <input type="text" class="form-control" placeholder="To Date"
+                 name="to_date" aria-describedby="basic-addon1"
+                 value="<%= params[:to_date] %>">
           <div class="input-group-append" id="basic-addon1">
             <div class="btn btn-outline-secondary">
               <i class="fa fa-calendar"></i>
@@ -49,7 +53,7 @@
         <th>Litre</th>
         <th>FAT</th>
         <th>SNF</th>
-        <th>Rate <span class="note small text-muted">This is Average rate Not for actual calculation</span></th>
+        <th>Rate</th>
         <th>Total price</th>
       </tr>
       </thead>
@@ -69,6 +73,8 @@
         <tr>
           <th>Totals</th>
           <th><%= @daily_collections.sum(&:litre) %></th>
+          <th></th>
+          <th></th>
           <th></th>
           <th><%= @daily_collections.sum(&:total_price) %></th>
         </tr>

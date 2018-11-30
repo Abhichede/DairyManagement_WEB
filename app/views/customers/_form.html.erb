@@ -35,13 +35,13 @@
   <div class="form-group row">
     <%= form.label :cattle_type, class: 'col-sm-2 col-form-label' %>
     <div class="col-sm-10">
-      <%= form.select :cattle_type, options_for_select(["COW", "BUFFALO"]),
-                      {include_blank: true}, class: 'form-control',
+      <%= form.select :cattle_type, options_for_select(["COW", "BUFFALO"], selected: (@customer.cattle_type unless @customer.nil?)),
+                      {include_blank: true }, class: 'form-control',
                       required: true, tabIndex: 4 %>
     </div>
   </div>
 
-  <div class="actions">
-    <%= form.submit 'Submit', class: 'btn btn-primary', tabIndex: 5 %>
+  <div class="actions" class="">
+    <%= form.submit 'Submit', class: 'btn btn-primary pull-right', tabIndex: 5 %>
   </div>
 <% end %>
