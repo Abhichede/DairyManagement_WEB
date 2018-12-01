@@ -1,0 +1,38 @@
+<%= form_with(model: dairy_detail, local: true) do |form| %>
+  <% if dairy_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(dairy_detail.errors.count, "error") %> prohibited this dairy_detail from being saved:</h2>
+
+      <ul>
+      <% dairy_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group row">
+    <%= form.label :name, class: 'col-sm-2 col-form-label' %>
+    <div class="col-lg-10 col-md-10">
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :address, class: 'col-sm-2 col-form-label' %>
+    <div class="col-lg-10 col-md-10">
+      <%= form.text_field :address, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :send_message, class: 'col-sm-2 col-form-label' %>
+    <div class="col-lg-10 col-md-10">
+      <%= form.check_box :send_message %>
+    </div>
+  </div>
+
+  <div class="actions pull-right">
+    <%= form.submit 'Submit', class: 'btn btn-primary' %>
+  </div>
+<% end %>

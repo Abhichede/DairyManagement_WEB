@@ -40,9 +40,9 @@ $('div#daily_collection_form').ready(function () {
     var hours = d.getHours();
 
     if(hours < 12 ){
-        $("input#daily_collection_shift").val("Morning");
+        $("select#daily_collection_shift").val("Morning");
     }else{
-        $("input#daily_collection_shift").val("Evening");
+        $("select#daily_collection_shift").val("Evening");
     }
 
     getCustomerID();

@@ -1,0 +1,43 @@
+<h1>Dairy Details
+<span class="pull-right">
+  <%= link_to 'New Dairy Detail', new_dairy_detail_path, class: 'btn btn-primary' %>
+</span>
+</h1>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Send message</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dairy_details.each do |dairy_detail| %>
+      <tr>
+        <td><%= dairy_detail.name %></td>
+        <td><%= dairy_detail.address %></td>
+        <td><%= dairy_detail.send_message %></td>
+        <td>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <%= link_to '<i class="fa fa-eye"></i>'.html_safe,
+                        dairy_detail, class: 'btn btn-primary btn-sm',
+                        'data-toggle':"tooltip", 'data-placement': "top",
+                        title: "Show details" %>
+            <%= link_to '<i class="fa fa-edit"></i>'.html_safe,
+                        edit_dairy_detail_path(dairy_detail),
+                        class: 'btn btn-secondary btn-sm', 'data-toggle':"tooltip",
+                        'data-placement': "top", title: "Edit Entry" %>
+            <%= link_to '<i class="fa fa-trash"></i>'.html_safe,
+                        dairy_detail, class: 'btn btn-danger btn-sm',
+                        method: :delete, data: { confirm: 'Are you sure?' },
+                        'data-toggle':"tooltip", 'data-placement': "top",
+                        title: "Delete Entry" %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

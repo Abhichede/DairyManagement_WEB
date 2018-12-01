@@ -35,10 +35,12 @@ class CustomerPaymentsController < ApplicationController
   def create
     @customer_payment = CustomerPayment.new(customer_payment_params)
     @customer_payment.user = current_user
-
+    @dairy_detail = DairyDetail.all.first
     respond_to do |format|
       if @customer_payment.save
-        send_payment_receipt_sms(@customer_payment.customer.contact, @customer_payment)
+        if @dairy_detail.send_message
+          send_payment_receipt_sms(@customer_payment.customer.contact, @customer_payment)
+        end
         format.html { redirect_to session[:previous_url], notice: 'Customer payment was successfully created.' }
         format.json { render :show, status: :created, location: @customer_payment }
       else
@@ -52,9 +54,12 @@ class CustomerPaymentsController < ApplicationController
   # PATCH/PUT /customer_payments/1.json
   def update
     @customer_payment.user = current_user
+    @dairy_detail = DairyDetail.all.first
     respond_to do |format|
       if @customer_payment.update(customer_payment_params)
-        send_payment_receipt_sms(@customer_payment.customer.contact, @customer_payment)
+        if @dairy_detail.send_message
+          send_payment_receipt_sms(@customer_payment.customer.contact, @customer_payment)
+        end
         format.html { redirect_to session[:previous_url], notice: 'Customer payment was successfully updated.' }
         format.json { render :show, status: :ok, location: @customer_payment }
       else

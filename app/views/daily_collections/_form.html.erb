@@ -51,7 +51,9 @@
     </div>
     <%= form.label :shift, class: 'col-sm-2 col-form-label' %>
     <div class="col-sm-4">
-      <%= form.text_field :shift, class: 'form-control', readonly: true %>
+      <%= form.select :shift, options_for_select(["Morning", "Evening"], selected: (@daily_collection.shift unless @daily_collection.nil?)),
+                      {include_blank: true }, class: 'form-control',
+                      required: true  %>
     </div>
   </div>
 

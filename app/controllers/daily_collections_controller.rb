@@ -53,7 +53,7 @@ class DailyCollectionsController < ApplicationController
     @daily_collection = DailyCollection.new(daily_collection_params)
     @daily_collection.time = Time.now
     @daily_collection.user = current_user
-
+    @dairy_detail = DairyDetail.all.first
     time = Time.now
     hours = time.hour
     shift = "Morning"
@@ -70,7 +70,9 @@ class DailyCollectionsController < ApplicationController
         format.html { redirect_to new_daily_collection_path, alert: 'Milk already collected for this customer & shift.' }
       else
         if @daily_collection.save
-          send_daily_receipt_sms(@daily_collection.customer.contact, @daily_collection)
+          if @dairy_detail.send_message
+            send_daily_receipt_sms(@daily_collection.customer.contact, @daily_collection)
+          end
           format.html { redirect_to new_daily_collection_path, notice: 'Daily collection was successfully created.' }
           format.json { render :show, status: :created, location: @daily_collection }
         else
@@ -85,9 +87,12 @@ class DailyCollectionsController < ApplicationController
   # PATCH/PUT /daily_collections/1.json
   def update
     @daily_collection.user = current_user
+    @dairy_detail = DairyDetail.all.first
     respond_to do |format|
       if @daily_collection.update(daily_collection_params)
-        send_daily_receipt_sms(@daily_collection.customer.contact, @daily_collection)
+        if @dairy_detail.send_message
+          send_daily_receipt_sms(@daily_collection.customer.contact, @daily_collection)
+        end
         format.html { redirect_to session[:previous_url], notice: 'Daily collection was successfully updated.' }
         format.json { render :show, status: :ok, location: @daily_collection }
       else

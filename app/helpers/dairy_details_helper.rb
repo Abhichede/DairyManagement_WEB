@@ -1,0 +1,2 @@
+module DairyDetailsHelper
+end

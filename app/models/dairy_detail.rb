@@ -1,0 +1,2 @@
+class DairyDetail < ApplicationRecord
+end

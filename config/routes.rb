@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :dairy_details
   root 'dashboard#index'
   devise_for :users
   resources :customer_payments

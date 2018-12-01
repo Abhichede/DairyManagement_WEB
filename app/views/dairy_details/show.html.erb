@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @dairy_detail.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @dairy_detail.address %>
+</p>
+
+<p>
+  <strong>Send message:</strong>
+  <%= @dairy_detail.send_message %>
+</p>
+
+<%= link_to 'Edit', edit_dairy_detail_path(@dairy_detail) %> |
+<%= link_to 'Back', dairy_details_path %>
