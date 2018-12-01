@@ -10,7 +10,10 @@ function getval(sel)
 }
 
 $(document).ready(function() {
-    $('#rate_chart_table').DataTable();
+    $('#rate_chart_table').DataTable({
+        scrollY: 400,
+        responsive: true
+    });
 
     $('form#rate_chart_form').validate();
 } );

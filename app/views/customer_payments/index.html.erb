@@ -22,23 +22,25 @@
           <td><%= customer_payment.amount %></td>
           <td><%= customer_payment.description %></td>
           <td>
-            <%= link_to '<i class="fa fa-print"></i>'.html_safe,
-                        customer_payment_path(customer_payment, format: 'pdf'), class: 'btn btn-info btn-sm',
-                        'data-toggle':"tooltip", 'data-placement': "top",
-                        title: "Print" %>
-            <%= link_to '<i class="fa fa-eye"></i>'.html_safe,
-                        customer_payment, class: 'btn btn-primary btn-sm',
-                        'data-toggle':"tooltip", 'data-placement': "top",
-                        title: "Show details" %>
-            <%= link_to '<i class="fa fa-edit"></i>'.html_safe,
-                        edit_customer_payment_path(customer_payment),
-                        class: 'btn btn-secondary btn-sm', 'data-toggle':"tooltip",
-                        'data-placement': "top", title: "Edit Entry" %>
-            <%= link_to '<i class="fa fa-trash"></i>'.html_safe,
-                        customer_payment, class: 'btn btn-danger btn-sm',
-                        method: :delete, data: { confirm: 'Are you sure?' },
-                        'data-toggle':"tooltip", 'data-placement': "top",
-                        title: "Delete Entry" %>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <%= link_to '<i class="fa fa-print"></i>'.html_safe,
+                          customer_payment_path(customer_payment, format: 'pdf'), class: 'btn btn-info btn-sm',
+                          'data-toggle':"tooltip", 'data-placement': "top",
+                          title: "Print" %>
+              <%= link_to '<i class="fa fa-eye"></i>'.html_safe,
+                          customer_payment, class: 'btn btn-primary btn-sm',
+                          'data-toggle':"tooltip", 'data-placement': "top",
+                          title: "Show details" %>
+              <%= link_to '<i class="fa fa-edit"></i>'.html_safe,
+                          edit_customer_payment_path(customer_payment),
+                          class: 'btn btn-secondary btn-sm', 'data-toggle':"tooltip",
+                          'data-placement': "top", title: "Edit Entry" %>
+              <%= link_to '<i class="fa fa-trash"></i>'.html_safe,
+                          customer_payment, class: 'btn btn-danger btn-sm',
+                          method: :delete, data: { confirm: 'Are you sure?' },
+                          'data-toggle':"tooltip", 'data-placement': "top",
+                          title: "Delete Entry" %>
+            </div>
           </td>
         </tr>
       <% end %>

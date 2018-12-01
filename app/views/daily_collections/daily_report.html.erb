@@ -47,6 +47,19 @@
         <th>Rate</th>
         <th>Total price</th>
       </tr>
+      <% unless @daily_collection.nil? %>
+        <tr>
+          <th>Totals</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th><%= @daily_collections.sum(&:litre) %></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th><%= @daily_collections.sum(&:total_price) %></th>
+        </tr>
+      <% end %>
       </thead>
 
       <tbody>
@@ -64,17 +77,6 @@
             <td><%= daily_collection.total_price %></td>
           </tr>
         <% end %>
-        <tr>
-          <th>Totals</th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th><%= @daily_collections.sum(&:litre) %></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th><%= @daily_collections.sum(&:total_price) %></th>
-        </tr>
       <% end %>
       </tbody>
     </table>

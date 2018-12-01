@@ -34,23 +34,25 @@
           <td><%= daily_collection.rate %></td>
           <td><%= daily_collection.total_price %></td>
           <td>
-            <%= link_to '<i class="fa fa-print"></i>'.html_safe,
-                        daily_collection_path(daily_collection, format: 'pdf'),
-                        class: 'btn btn-secondary btn-sm', 'data-toggle':"tooltip",
-                        'data-placement': "top", title: "Print" %>
-            <%= link_to '<i class="fa fa-eye"></i>'.html_safe,
-                        daily_collection, class: 'btn btn-primary btn-sm',
-                        'data-toggle':"tooltip", 'data-placement': "top",
-                        title: "Show details" %>
-            <%= link_to '<i class="fa fa-edit"></i>'.html_safe,
-                        edit_daily_collection_path(daily_collection),
-                        class: 'btn btn-secondary btn-sm', 'data-toggle':"tooltip",
-                        'data-placement': "top", title: "Edit Entry" %>
-            <%= link_to '<i class="fa fa-trash"></i>'.html_safe,
-                        daily_collection, class: 'btn btn-danger btn-sm',
-                        method: :delete, data: { confirm: 'Are you sure?' },
-                        'data-toggle':"tooltip", 'data-placement': "top",
-                        title: "Delete Entry" %>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <%= link_to '<i class="fa fa-print"></i>'.html_safe,
+                          daily_collection_path(daily_collection, format: 'pdf'),
+                          class: 'btn btn-secondary btn-sm', 'data-toggle':"tooltip",
+                          'data-placement': "top", title: "Print" %>
+              <%= link_to '<i class="fa fa-eye"></i>'.html_safe,
+                          daily_collection, class: 'btn btn-primary btn-sm',
+                          'data-toggle':"tooltip", 'data-placement': "top",
+                          title: "Show details" %>
+              <%= link_to '<i class="fa fa-edit"></i>'.html_safe,
+                          edit_daily_collection_path(daily_collection),
+                          class: 'btn btn-secondary btn-sm', 'data-toggle':"tooltip",
+                          'data-placement': "top", title: "Edit Entry" %>
+              <%= link_to '<i class="fa fa-trash"></i>'.html_safe,
+                          daily_collection, class: 'btn btn-danger btn-sm',
+                          method: :delete, data: { confirm: 'Are you sure?' },
+                          'data-toggle':"tooltip", 'data-placement': "top",
+                          title: "Delete Entry" %>
+            </div>
           </td>
         </tr>
       <% end %>

@@ -1,7 +1,10 @@
 $(function () {
-    $('table#total_collections_table').DataTable();
+    $('table#total_collections_table').DataTable({
+        responsive: true
+    });
     $('#table_current_collection').DataTable({
         scrollY: 400,
+        responsive: true,
         order: false
     });
 

@@ -11,6 +11,9 @@ $(function () {
        }
    });
 
-   $('table#table_customer_payments').DataTable();
+   $('table#table_customer_payments').DataTable({
+       scrollY: 400,
+       responsive: true
+   });
    $('form#customer_payment_form').validate();
 });
