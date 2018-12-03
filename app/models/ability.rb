@@ -12,7 +12,7 @@ class Ability
       can :manage, RateChart
       can :manage, DailyCollection
     else
-      can :read, :all
+      can :read, :dashboard
     end
     #
     # The first argument to `can` is the action you are giving the user
