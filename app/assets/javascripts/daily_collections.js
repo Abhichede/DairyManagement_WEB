@@ -1,7 +1,5 @@
 $(function () {
-    $('table#total_collections_table').DataTable({
-        responsive: true
-    });
+    $('table#total_collections_table').DataTable();
     $('#table_current_collection').DataTable({
         scrollY: 400,
         responsive: true,
@@ -15,6 +13,18 @@ $(function () {
             date: "fa fa-calendar",
             up: "fa fa-arrow-up",
             down: "fa fa-arrow-down"
+        }
+    });
+
+    $('#time_daily_collection').datetimepicker({
+        format: 'LT',
+        icons: {
+            time: "fa fa-clock-o",
+            date: "fa fa-calendar",
+            up: "fa fa-arrow-up",
+            down: "fa fa-arrow-down",
+            previous: "fa fa-arrow-left",
+            next: "fa fa-arrow-right"
         }
     });
     $('#to_date_payment_register').datetimepicker({
@@ -39,14 +49,20 @@ $('div#daily_collection_form').ready(function () {
     var d = new Date();
     var hours = d.getHours();
 
-    if(hours < 12 ){
-        $("select#daily_collection_shift").val("Morning");
-    }else{
-        $("select#daily_collection_shift").val("Evening");
-    }
+    updateShift(d);
 
     getCustomerID();
 });
+
+function updateShift(time) {
+    var hours = time.getHours();
+
+    if(hours < 12 ){
+        $("input#daily_collection_shift").val("Morning");
+    }else{
+        $("input#daily_collection_shift").val("Evening");
+    }
+}
 
 function getCustomerID() {
     var customer_id = $('.selectpicker#daily_collection_customer_id option:selected').val();

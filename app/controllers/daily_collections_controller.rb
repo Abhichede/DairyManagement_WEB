@@ -51,20 +51,12 @@ class DailyCollectionsController < ApplicationController
   # POST /daily_collections.json
   def create
     @daily_collection = DailyCollection.new(daily_collection_params)
-    @daily_collection.time = Time.now
     @daily_collection.user = current_user
     @dairy_detail = DairyDetail.all.first
-    time = Time.now
-    hours = time.hour
-    shift = "Morning"
-    if hours > 12
-      shift = "Evening"
-    else
-      shift = "Morning"
-    end
 
     already_collected = DailyCollection.where(customer_id: daily_collection_params[:customer_id],
-                                               date: daily_collection_params[:date], shift: shift).count
+                                               date: daily_collection_params[:date],
+                                              shift: daily_collection_params[:shift]).count
     respond_to do |format|
       if already_collected != 0
         format.html { redirect_to new_daily_collection_path, alert: 'Milk already collected for this customer & shift.' }

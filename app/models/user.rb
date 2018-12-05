@@ -12,6 +12,6 @@ class User < ApplicationRecord
   after_create :assign_default_role
 
   def assign_default_role
-    self.add_role(:moderator) if self.roles.blank?
+    self.add_role(:editor) if self.roles.blank?
   end
 end

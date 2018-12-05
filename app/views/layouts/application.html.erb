@@ -39,8 +39,8 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <% if user_signed_in? %>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -75,9 +75,11 @@
             <%= link_to 'Add New Chart', new_rate_chart_path, class: 'dropdown-item'  %>
           </div>
         </li>
-        <li class="nav-item">
-          <%= link_to 'Dairy Details', dairy_details_path, class: 'nav-link' %>
-        </li>
+        <% unless current_user.has_role? :editor %>
+          <li class="nav-item">
+            <%= link_to 'Dairy Details', dairy_details_path, class: 'nav-link' %>
+          </li>
+        <% end %>
       </ul>
 
       <form class="form-inline my-2 my-lg-0" action="<%= customers_path %>" onSubmit="return false" name="myform2">
@@ -91,6 +93,7 @@
         </li>
       </ul>
     </div>
+    <% end %>
   </nav>
   <div style="margin: 20px 1rem;">
     <div class="center">

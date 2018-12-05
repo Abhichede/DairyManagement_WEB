@@ -39,56 +39,6 @@
       </div>
     </div>
     <div class="col-lg-3 col-md-3">
-      <div class="card text-white bg-danger mb-3">
-        <div class="card-header">Payments Done</div>
-        <div class="card-body">
-          <h5 class="card-title text-center">
-            <%= link_to customer_payments_path, class: 'text-white' do %>
-              <i class="fa fa-check" style="font-size: 8rem"></i>
-            <% end %>
-          </h5>
-        </div>
-        <div class="card-footer">
-          <h3 class="text-center">
-            <%= link_to customer_payments_path, class: 'text-white' do %>
-              Rs. <%= @customer_payments.sum(&:amount) %>
-            <% end %>
-          </h3>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-3">
-      <div class="card text-white bg-success mb-3">
-        <div class="card-header">Total Amount</div>
-        <div class="card-body">
-          <h5 class="card-title text-center">
-            <%= link_to daily_collections_path, class: 'text-white' do %>
-              <i class="fa fa-money" style="font-size: 8rem"></i>
-            <% end %>
-          </h5>
-        </div>
-        <div class="card-footer">
-          <h3 class="text-center">
-            <%= link_to daily_collections_path, class: 'text-white' do %>
-              Rs. <%= @daily_collections.sum(&:total_price) %>
-            <% end %>
-          </h3>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-9 col-md-9">
-      <div class="card text-white bg-info mb-3">
-        <div class="card-header">Current Week's Collection</div>
-        <div class="card-body">
-          <h5 class="card-title text-center">
-            <%= line_chart daily_collection_group_by_date, xtitle: "Date", ytitle: "Amount in Rs." %>
-          </h5>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-3">
       <div class="card text-white bg-success mb-3">
         <div class="card-header">Available Messages</div>
         <div class="card-body">
@@ -103,5 +53,59 @@
         </div>
       </div>
     </div>
+    <% unless current_user.has_role? :editor %>
+      <div class="col-lg-3 col-md-3">
+        <div class="card text-white bg-danger mb-3">
+          <div class="card-header">Payments Done</div>
+          <div class="card-body">
+            <h5 class="card-title text-center">
+              <%= link_to customer_payments_path, class: 'text-white' do %>
+                <i class="fa fa-check" style="font-size: 8rem"></i>
+              <% end %>
+            </h5>
+          </div>
+          <div class="card-footer">
+            <h3 class="text-center">
+              <%= link_to customer_payments_path, class: 'text-white' do %>
+                Rs. <%= @customer_payments.sum(&:amount) %>
+              <% end %>
+            </h3>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-lg-9 col-md-9">
+      <div class="card text-white bg-info mb-3">
+        <div class="card-header">Current Week's Collection</div>
+        <div class="card-body">
+          <h5 class="card-title text-center">
+            <%= line_chart daily_collection_group_by_date, xtitle: "Date", ytitle: "Amount in Rs." %>
+          </h5>
+        </div>
+      </div>
+    </div>
+    <% unless current_user.has_role? :editor %>
+      <div class="col-lg-3 col-md-3">
+        <div class="card text-white bg-success mb-3">
+          <div class="card-header">Total Amount</div>
+          <div class="card-body">
+            <h5 class="card-title text-center">
+              <%= link_to daily_collections_path, class: 'text-white' do %>
+                <i class="fa fa-money" style="font-size: 8rem"></i>
+              <% end %>
+            </h5>
+          </div>
+          <div class="card-footer">
+            <h3 class="text-center">
+              <%= link_to daily_collections_path, class: 'text-white' do %>
+                Rs. <%= @daily_collections.sum(&:total_price) %>
+              <% end %>
+            </h3>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

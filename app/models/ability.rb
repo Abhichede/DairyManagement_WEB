@@ -11,6 +11,10 @@ class Ability
       can :manage, CustomerPayment
       can :manage, RateChart
       can :manage, DailyCollection
+    elsif user.has_role? :editor
+      can [:create, :read, :update], Customer
+      can [:create, :read, :update, :payment_register, :daily_report], DailyCollection
+      can :read, :dashboard
     else
       can :read, :dashboard
     end
