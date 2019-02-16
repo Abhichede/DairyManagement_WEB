@@ -26,7 +26,7 @@ Payment Register</h5>
 </div>
 <table class="table table-bordered page-break">
   <thead>
-  <tr>
+  <tr style="page-break-inside: avoid; display: inline-table;">
     <th>Customer</th>
     <th>Litre</th>
     <th>FAT</th>
@@ -41,7 +41,7 @@ Payment Register</h5>
   <tbody>
   <% unless @daily_collections.nil? %>
     <% @daily_collections.each do |daily_collection| %>
-      <tr>
+      <tr style="page-break-inside: avoid; display: inline-table;">
         <td><%= daily_collection.customer.name %></td>
         <td><%= daily_collection.litre %></td>
         <td><%= daily_collection.fat %></td>
@@ -50,7 +50,7 @@ Payment Register</h5>
         <td><%= daily_collection.total_price %></td>
       </tr>
     <% end %>
-    <tr>
+    <tr style="page-break-inside: avoid; display: inline-table;">
       <th>Totals</th>
       <th><%= @daily_collections.sum(&:litre) %></th>
       <th></th>
