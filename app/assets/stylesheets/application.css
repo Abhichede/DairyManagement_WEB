@@ -22,5 +22,4 @@ body{
 .navbar{
     /*background: linear-gradient(45deg, #93a5cf, #e4efe9) no-repeat scroll center center !important;*/
 }
-
-
+.page-break { display:block; clear:both; page-break-after:always; }
