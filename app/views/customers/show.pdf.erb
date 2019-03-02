@@ -1,0 +1,72 @@
+<style>
+  tr, td, th, tbody, thead, tfoot {
+    page-break-inside: avoid !important;
+  }
+</style>
+<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  Collection</h5>
+<span style="text-align: center">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      SHIVKRUPA DOODH SANKALAN ANI SHEET KENDRA <BR>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      MADKIJAMB Mo. 9970430295, 9623109896
+</span>
+<br><br>
+<div class="row">
+  <div class="col">
+    From: <%= params[:from_date] %>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    To: <%= params[:to_date] %>
+  </div>
+</div>
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>Date / Time</th>
+    <th>Shift</th>
+    <th>Litre</th>
+    <th>Fat</th>
+    <th>Snf</th>
+    <th>Rate</th>
+    <th>Total price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% if @daily_collections.nil? %>
+    <tr>
+      <td colspan="3">Nothing Found</td>
+    </tr>
+  <% else %>
+    <% @daily_collections.order("date DESC").each do |daily_collection| %>
+      <tr>
+        <td><%= daily_collection.date %> / <%= daily_collection.time.strftime("%I:%M %p") %></td>
+        <td><%= daily_collection.shift %></td>
+        <td><%= daily_collection.litre %></td>
+        <td><%= daily_collection.fat %></td>
+        <td><%= daily_collection.snf %></td>
+        <td><%= daily_collection.rate %></td>
+        <td><%= daily_collection.total_price %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <th>Total</th>
+      <td></td>
+      <th><%= @daily_collections.sum(&:litre) %></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th><%= @daily_collections.sum(&:total_price) %></th>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

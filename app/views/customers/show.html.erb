@@ -96,7 +96,7 @@
     <div class="card-header">
       Filter by Dates
       <div class="pull-right">
-        <%=  link_to '<i class="fa fa-print"></i> Print'.html_safe, payment_register_daily_collections_path(from_date: params[:from_date], to_date: params[:to_date], format: 'pdf'), class: 'btn btn-info mb-2' %>
+        <%=  link_to '<i class="fa fa-print"></i> Print'.html_safe, customer_path(id: @customer.id, from_date: params[:from_date], to_date: params[:to_date], format: 'pdf'), class: 'btn btn-info mb-2' %>
       </div>
     </div>
     <div class="card-body">

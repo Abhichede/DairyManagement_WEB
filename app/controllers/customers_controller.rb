@@ -17,8 +17,18 @@ class CustomersController < ApplicationController
   def show
     from_date = params[:from_date].nil? ? Date.today : params[:from_date]
     to_date = params[:to_date].nil? ? Date.today : params[:to_date]
-    @daily_collections = @customer.daily_collections.where(date: from_date..to_date)
-    puts @daily_collections.inspect
+    if from_date.nil?
+      @daily_collections = @customer.daily_collections.where(date: from_date..to_date)
+    else
+      @daily_collections = @customer.daily_collections
+    end
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'collection', encoding: 'UTF-8'
+      end
+    end
   end
 
   # GET /customers/new
