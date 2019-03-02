@@ -15,6 +15,10 @@ class CustomersController < ApplicationController
   # GET /customers/1
   # GET /customers/1.json
   def show
+    from_date = params[:from_date].nil? ? Date.today : params[:from_date]
+    to_date = params[:to_date].nil? ? Date.today : params[:to_date]
+    @daily_collections = @customer.daily_collections.where(date: from_date..to_date)
+    puts @daily_collections.inspect
   end
 
   # GET /customers/new
