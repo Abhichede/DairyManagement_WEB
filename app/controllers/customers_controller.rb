@@ -15,12 +15,12 @@ class CustomersController < ApplicationController
   # GET /customers/1
   # GET /customers/1.json
   def show
-    from_date = params[:from_date].nil? ? Date.today : params[:from_date]
-    to_date = params[:to_date].nil? ? Date.today : params[:to_date]
+    from_date = params[:from_date].nil? ? '1900-01-01' : params[:from_date]
+    to_date = params[:to_date].nil? ? '3000-01-01 ' : params[:to_date]
     if from_date.nil?
-      @daily_collections = @customer.daily_collections.where(date: from_date..to_date)
-    else
       @daily_collections = @customer.daily_collections
+    else
+      @daily_collections = @customer.daily_collections.where(date: from_date..to_date)
     end
 
     respond_to do |format|
