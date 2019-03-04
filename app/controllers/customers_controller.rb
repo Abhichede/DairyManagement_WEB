@@ -25,6 +25,7 @@ class CustomersController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.json
       format.pdf do
         render pdf: 'collection', encoding: 'UTF-8'
       end
