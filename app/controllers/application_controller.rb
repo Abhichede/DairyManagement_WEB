@@ -35,15 +35,18 @@ AMOUNT:#{daily_collection.total_price}\r
 -THANK YOU\r
 Powered By LINKERITSOLUTIONS\r")
     puts message
-    response = RestClient.get "http://sms.aamantran.co.in/api/send_transactional_sms.php?username=#{username}&msg_token=#{message_token}&sender_id=#{sender_id}&message=#{message}&mobile=#{mobile_no}"
-    puts response
-    case response.code
+    begin
+      response = RestClient.get "http://sms.aamantran.co.in/api/send_transactional_sms.php?username=#{username}&msg_token=#{message_token}&sender_id=#{sender_id}&message=#{message}&mobile=#{mobile_no}"
+      case response.code
       when 400
         puts response
       when 200
         puts response
       else
         puts "Invalid response #{response} received."
+      end
+    rescue => exception
+      exception.response
     end
   end
 
@@ -53,30 +56,37 @@ Powered By LINKERITSOLUTIONS\r")
     sender_id = 'SDAIRY'
     customer_name = customer_payment.customer.name.split(' ')
     message = CGI.escape("Dear #{customer_name[0]} #{customer_name[1] if customer_name[1]}, Your payment of Rs. #{customer_payment.amount} is successfully paid by SHIVKRUPA DAIRY on dated #{customer_payment.date} #{customer_payment.created_at.strftime("%I:%M %p")}.THANK YOU")
-    puts message
-    response = RestClient.get "http://sms.aamantran.co.in/api/send_transactional_sms.php?username=#{username}&msg_token=#{message_token}&sender_id=#{sender_id}&message=#{message}&mobile=#{mobile_no}"
-    puts response
-    case response.code
-    when 400
+    begin
+      response = RestClient.get "http://sms.aamantran.co.in/api/send_transactional_sms.php?username=#{username}&msg_token=#{message_token}&sender_id=#{sender_id}&message=#{message}&mobile=#{mobile_no}"
       puts response
-    when 200
-      puts response
-    else
-      puts "Invalid response #{response} received."
+      case response.code
+      when 400
+        puts response
+      when 200
+        puts response
+      else
+        puts "Invalid response #{response} received."
+      end
+    rescue => exception
+      puts "Invalid response #{exception} received."
     end
   end
 
   def check_sms_balance
-    response = RestClient.get "http://sms.aamantran.co.in/api/balance_check_api.php?myuid=u43741&mytoken=heJWt4"
-    case response.code
-    when 400
-      puts "400: "+ response
-    when 200
-      puts response
-    else
-      puts "Invalid response #{response} received."
+    begin
+      response = RestClient.get "http://sms.aamantran.co.in/api/balance_check_api.php?myuid=u43741&mytoken=heJWt4"
+      case response.code
+      when 400
+        puts "400: "+ response
+      when 200
+        puts response
+      else
+        puts "Invalid response #{response} received."
+      end
+    rescue => exception
+      puts exception
+      response = "Something went wrong #{exception}"
     end
-
     response
   end
 end
