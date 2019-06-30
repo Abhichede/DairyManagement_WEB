@@ -43,7 +43,7 @@ Powered By LINKERITSOLUTIONS\r")
       when 200
         puts response
       else
-        fail "Invalid response #{response} received."
+        puts "Invalid response #{response} received."
     end
   end
 
@@ -62,7 +62,7 @@ Powered By LINKERITSOLUTIONS\r")
     when 200
       puts response
     else
-      fail "Invalid response #{response} received."
+      puts "Invalid response #{response} received."
     end
   end
 
@@ -74,7 +74,7 @@ Powered By LINKERITSOLUTIONS\r")
     when 200
       puts response
     else
-      fail "Invalid response #{response} received."
+      puts "Invalid response #{response} received."
     end
 
     response
