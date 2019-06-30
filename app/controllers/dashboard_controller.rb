@@ -6,7 +6,7 @@ class DashboardController < ApplicationController
     response = check_sms_balance
 
     a = response.split(':')
-    t = a[4].split('<BR/>') if a.nil?
+    t = a[4].split('<BR/>') unless a.nil?
     @messages = Hash.new()
     @messages["count_m"] = !t.nil? ? t[0] : 'NA'
   end
