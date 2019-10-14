@@ -201,3 +201,10 @@ function calculateSNFAndUpdateRate(fat, lacto, litres, cattle_type) {
         }
     });
 }
+function updateTotalIfRateChnaged() {
+    let rate = $("input#daily_collection_rate").val();
+    var litres = $("input#daily_collection_litre").val();
+    $("input#daily_collection_total_price").val(
+      accounting.toFixed(rate * litres, 2)
+    );
+}
