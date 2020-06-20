@@ -17,9 +17,9 @@ class ApplicationController < ActionController::Base
   end
 
   def send_daily_receipt_sms(mobile_no, daily_collection)
-    username = 'u43741'
-    message_token = 'heJWt4'
-    sender_id = 'SDAIRY'
+    username = ENV['SMS_API_USERNAME']
+    message_token = ENV['SMS_API_TOKEN']
+    sender_id = ENV['SMS_API_SENDER_ID']
     customer_name = daily_collection.customer.name.split(' ')
     message = CGI.escape("SHIVKRUPA DAIRY\r\n\r\nDATE:#{daily_collection.date} #{daily_collection.time.strftime("%I:%M %p")}\r
 SHIFT:#{daily_collection.shift}\r
@@ -51,9 +51,9 @@ Powered By LINKERITSOLUTIONS\r")
   end
 
   def send_payment_receipt_sms(mobile_no, customer_payment)
-    username = 'u43741'
-    message_token = 'heJWt4'
-    sender_id = 'SDAIRY'
+    username = ENV['SMS_API_USERNAME']
+    message_token = ENV['SMS_API_TOKEN']
+    sender_id = ENV['SMS_API_SENDER_ID']
     customer_name = customer_payment.customer.name.split(' ')
     message = CGI.escape("Dear #{customer_name[0]} #{customer_name[1] if customer_name[1]}, Your payment of Rs. #{customer_payment.amount} is successfully paid by SHIVKRUPA DAIRY on dated #{customer_payment.date} #{customer_payment.created_at.strftime("%I:%M %p")}.THANK YOU")
     begin
@@ -74,7 +74,7 @@ Powered By LINKERITSOLUTIONS\r")
 
   def check_sms_balance
     begin
-      response = RestClient.get "http://sms.aamantran.co.in/api/balance_check_api.php?myuid=u43741&mytoken=heJWt4"
+      response = RestClient.get "http://sms.aamantran.co.in/api/balance_check_api.php?myuid=#{ENV['SMS_API_USERNAME']}&mytoken=#{ENV['SMS_API_TOKEN']}"
       case response.code
       when 400
         puts "400: "+ response
